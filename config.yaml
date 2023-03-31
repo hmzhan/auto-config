@@ -6,3 +6,4 @@ qa:
   db_server: "aws_qa"
 prod:
   db_server: "aws_prod"
+dev:

@@ -14,10 +14,10 @@ class Config:
         :param active_config: active configurations
         :return: a merged dictionary
         """
-        if len(default_config) == 0:
+        if default_config is None:
             return default_config
-        elif len(active_config) == 0:
-            return active_config
+        elif active_config is None:
+            return default_config
         else:
             return {**default_config, **active_config}
 
@@ -34,4 +34,3 @@ class Config:
             return merged_config
         except:
             print(f"Please provide {proj_env} parameters")
-
