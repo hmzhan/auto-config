@@ -1,1 +1,1 @@
-# config
+# Configurations
