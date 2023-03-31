@@ -1,0 +1,8 @@
+default:
+  effective_date: "2023-03-31"
+  dataset: "data.csv"
+  trials: 10
+qa:
+  db_server: "aws_qa"
+prod:
+  db_server: "aws_prod"
