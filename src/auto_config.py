@@ -6,7 +6,8 @@ class Config:
         self.config_file = config_file
         self.config = yaml.load(open(self.config_file, "r"), Loader=yaml.FullLoader)
 
-    def _merge(self, default_config, active_config):
+    @staticmethod
+    def _merge(default_config, active_config):
         """
         Merge two dictionaries
         :param default_config: default configurations
@@ -27,6 +28,10 @@ class Config:
         :return: a dictionary that contains default and active config
         """
         default_config = self.config["default"]
-        active_config = self.config[proj_env]
-        merged_config = self._merge(default_config, active_config)
-        return merged_config
+        try:
+            active_config = self.config[proj_env]
+            merged_config = self._merge(default_config, active_config)
+            return merged_config
+        except:
+            print(f"Please provide {proj_env} parameters")
+
