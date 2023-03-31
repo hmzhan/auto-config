@@ -15,7 +15,7 @@ class Config:
         :return: a merged dictionary
         """
         if default_config is None:
-            return default_config
+            return active_config
         elif active_config is None:
             return default_config
         else:
@@ -33,4 +33,4 @@ class Config:
             merged_config = self._merge(default_config, active_config)
             return merged_config
         except:
-            print(f"Please provide {proj_env} parameters")
+            print(f"Please provide {proj_env} parameters in {self.config_file}")
