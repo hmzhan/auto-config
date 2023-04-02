@@ -4,15 +4,17 @@ from pathlib import Path
 
 
 class Config:
-    def __init__(self, config_file):
-        self.config_file = config_file
-        self.config = self._load_config()
+    def __init__(self):
+        raise EnvironmentError(
+            "Config is designed to be instantiated using the `Config.from_file()` method"
+        )
 
-    def _load_config(self):
-        if Path(self.config_file).is_file():
-            return YamlLoader(path=self.config_file).load()
+    @staticmethod
+    def _load_config(config_file):
+        if Path(config_file).is_file():
+            return YamlLoader(path=config_file).load()
         else:
-            raise Exception(f"{self.config_file} not found.")
+            raise ValueError(f"{config_file} not found.")
 
     @staticmethod
     def _merge(default_config, active_config):
@@ -29,19 +31,22 @@ class Config:
         else:
             return {**default_config, **active_config}
 
-    def get(self, proj_env):
+    @classmethod
+    def from_file(cls, config_file, proj_env):
         """
         Get configurations for an active proj environment
+        :param config_file: path to config file
         :param proj_env: active project environment: qa, prod, etc.
         :return: a dictionary that contains default and active config
         """
-        if "default" in self.config:
-            default_config = self.config["default"]
+        config = cls._load_config(config_file)
+        if "default" in config:
+            default_config = config["default"]
         else:
-            raise Exception("You must provide a default configuration")
-        if proj_env in self.config:
-            active_config = self.config[proj_env]
+            raise ValueError("You must provide a default configuration")
+        if proj_env in config:
+            active_config = config[proj_env]
         else:
-            raise Exception(f"Please provide {proj_env} parameters in {self.config_file}")
-        merged_config = self._merge(default_config, active_config)
+            raise ValueError(f"Please provide {proj_env} parameters in {config_file}")
+        merged_config = cls._merge(default_config, active_config)
         return merged_config
