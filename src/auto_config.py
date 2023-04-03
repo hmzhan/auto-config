@@ -6,7 +6,7 @@ from pathlib import Path
 class AutoConfig:
     def __init__(self):
         raise EnvironmentError(
-            "Config is designed to be instantiated using the `Config.from_file()` method"
+            "Config is designed to be instantiated using the `AutoConfig.from_file()` method"
         )
 
     @staticmethod
