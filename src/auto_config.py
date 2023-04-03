@@ -3,7 +3,7 @@ from piny import YamlLoader
 from pathlib import Path
 
 
-class Config:
+class AutoConfig:
     def __init__(self):
         raise EnvironmentError(
             "Config is designed to be instantiated using the `Config.from_file()` method"
