@@ -2,5 +2,5 @@
 
 TODO:
 - [x] load YAML file
-- [] load JSON file
-- [] merge .py script
+- [ ] load JSON file
+- [ ] merge .py script
