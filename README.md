@@ -1,4 +1,5 @@
-# Configurations
+# Configuration Management
+
 
 TODO:
 - [x] load YAML file
